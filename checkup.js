@@ -1,38 +1,42 @@
+import 'rc-slider/assets/index.css';
+
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Header, Section, renderCheckup, BackToMain } from './index';
 import ThankYouPage from './thankyou';
+import Slider from 'rc-slider';
 
 let painLevel;
 
-//let painReports = [];
-
-const Textbox = props => (
-    <form>
-        <textarea name="sideEffects"/>
-    </form>
-);
+class Textbox extends Component {
+    render() {
+        return (
+            <form>
+                <input type="text" className="biggertextbox" id={this.props.id}/>
+            </form>
+        )
+    }
+};
 
 class PainLevelQuestions extends Component {
     render() {
         if (painLevel < 4) {
             return (
                 <div>
-                    <Section text="Does the pain impair your ability to perform daily activities such as working, socializing etc.?" subtext={<YesNo name="painImpair" />} />
-                    <Section text="How many pills have you taken per day?" subtext={<input type="text"/>} />
-                    <Section text="Are you satisfied with your dosage?" subtext={<YesNo name="dosage" />} />
-                    <Section text="Have you noticed any side effects? If you have, please describe them." answer={Textbox} />
-                    <Section text="Do the side effects impair your ability to perform daily activities such as working, socializing etc.?" />
+                    <Section text="1. Does the pain impair your ability to perform daily activities such as working, socializing etc.?" subtext={<YesNo name="painImpair" />} />
+                    <Section text="2. Are you satisfied with your dosage?" subtext={<YesNo name="dosage" />} />
+                    <Section text="3. Have you noticed any side effects? If you have, please describe them below." subtext={<Textbox id="side-effects" />} />
+                    <Section text="4. Do the side effects impair your ability to perform daily activities such as working, socializing etc.?" subtext={<YesNo name="impair" />} />
                     <SubmitButton />
                 </div> 
             );
         } else if (painLevel < 7) {
             return (
                 <div>
-                    <Section text="1: How do you cope with the pain?" />
-                    <Section text="2: Does the pain impair your ability to sleep?" />
-                    <Section text="3: How many pills have you taken per day?" /> 
-                    <Section text="4: Have you experienced any severe side effects (such as bleeding)?" />    
+                    <Section text="1: Can you cope with the pain?" subtext={<YesNo name="cope" />} />
+                    <Section text="2: Does the pain impair your ability to sleep?" subtext={<YesNo name="sleep" />} /> 
+                    <Section text="3. Have you noticed any side effects? If you have, please describe them." subtext={<Textbox id="side-effects" />} />
+                    <Section text="3: Have you experienced any severe side effects (such as bleeding)?" subtext={<YesNo name="severe" />} />    
                     <SubmitButton />                                   
                 </div>
             );
@@ -44,59 +48,20 @@ class PainLevelQuestions extends Component {
     }
 };
 
-class PainLevelRadios extends Component {
-    createButtons() {
-        let btns = [];
-        for (let i = 0; i < 11; i++) {
-            btns.push(i.toString());
-        }
-        return btns;
-    };
-    handlePainLevel(event) {
-        event.preventDefault();
-        const radios = document.getElementsByName('pain');
-    
-        for (let i = 0; i < radios.length; i++) {
-            if (radios[i].checked) {
-                painLevel = radios[i].value;
-            }
-        }
-        renderCheckup();
-    }
-    render() {
-        return (
-            <form onSubmit={this.handlePainLevel}>
-                {
-                    this.createButtons().map((num) => <PainLevel key={num} level={num} />)
-                }<br/>
-                <button className="btn-primary" type="submit">Select</button>
-            </form>
-        )
-    }
-};
-
-class PainLevel extends Component {
-    render() {
-        return (
-            <label className="radio-inline"><input type="radio" name="pain" value={this.props.level}/>{this.props.level}</label>
-        );
-    }
-};
-
 class PainExplanation extends Component {
     render() {
-        switch(painLevel) {
-            case '0': return <p>0: You have no pain at all.</p>
-            case '1': return <p>1: Your pain is hardly noticable.</p>
-            case '2': return <p>2: Your pain is mild and you are aware of your pain when you pay attention to it.</p>
-            case '3': return <p>3: Your pain is tolerable and you don’t notice it most of the time.</p>
-            case '4': return <p>4: Your pain is moderate and you are aware of it most of the time but you can continue most daily activities.</p>
-            case '5': return <p>5: Your pain is strong and distracting and you are unable to perform some daily activities.</p>
-            case '6': return <p>6: Your pain is intense and can cause you to think unclearly at times. You think about the pain all of the time and are unable to do many daily activities.</p>
-            case '7': return <p>7: Your pain is unmanageable and keeps you from doing most of your daily activities.</p>
-            case '8': return <p>8: Your pain is horrible and talking and listening are hard because of it.</p>
-            case '9': return <p>9: Your pain is so severe that you cannot tolerate it and are unable to talk or move much.</p>
-            case '10': return <p>10: You are unable to move and will go unconscious soon because of unimaginable pain.</p>
+        switch(this.props.level) {
+            case 0: return <p>0: You have no pain at all.</p>
+            case 1: return <p>1: Your pain is hardly noticable.</p>
+            case 2: return <p>2: Your pain is mild and you are aware of your pain when you pay attention to it.</p>
+            case 3: return <p>3: Your pain is tolerable and you don’t notice it most of the time.</p>
+            case 4: return <p>4: Your pain is moderate and you are aware of it most of the time but you can continue most daily activities.</p>
+            case 5: return <p>5: Your pain is strong and distracting and you are unable to perform some daily activities.</p>
+            case 6: return <p>6: Your pain is intense and can cause you to think unclearly at times. You think about the pain all of the time and are unable to do many daily activities.</p>
+            case 7: return <p>7: Your pain is unmanageable and keeps you from doing most of your daily activities.</p>
+            case 8: return <p>8: Your pain is horrible and talking and listening are hard because of it.</p>
+            case 9: return <p>9: Your pain is so severe that you cannot tolerate it and are unable to talk or move much.</p>
+            case 10: return <p>10: You are unable to move and will go unconscious soon because of unimaginable pain.</p>
             default: return null;
         }
     }
@@ -112,12 +77,26 @@ class Notification extends Component {
     }
 };
 
+class PainLevelSlider extends Component {
+    handlePainLevel(value) {
+        painLevel = value / 10;
+        renderCheckup();
+    }
+    render() {
+        return (
+            <div className="col-md-6 col-md-offset-3">
+                <Slider step={10} defaultValue={0} onChange={this.handlePainLevel} />
+            </div>
+        )
+    }
+};
+
 const Questions = props => (
     <div>
         <div id="question1">
-            <Section text="What is your current pain level?" subtext={<PainLevelRadios />} />
+            <Section text="What is your current pain level?" subtext={<PainLevelSlider />} />
             <div className="painExp">
-                <PainExplanation />
+                <PainExplanation level={painLevel} />
             </div>
             <PainLevelQuestions />
         </div>

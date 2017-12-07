@@ -6,6 +6,7 @@ export default class ThankYouPage extends Component {
         return (
             <div>
                 <Header title="Thank you!" />
+                <p>Your answers have been submitted.</p>
                 <BackToMain />
             </div>
         )

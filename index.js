@@ -6,7 +6,7 @@ import PatientPage from './patient';
 import LoginPage from './login';
 import CheckupPage from './checkup';
 import ProfilePage from './profile';
-import ReportPage from './report';
+import PrescriptionPage from './prescriptions';
 import ContactPage from './contact';
 
 class Header extends Component {
@@ -29,12 +29,13 @@ class Section extends Component {
             <div className="questionbox">
                 <h4>{this.props.text}</h4>
                 {this.props.subtext}
+                {this.props.more}
             </div>
         );
     }
 };
 
-const BackToMain = props => <button className="btn-basic" onClick={renderPatient}>Back to front page</button>;
+const BackToMain = props => <div className="col-md-2 col-md-offset-5"><button className="btn-basic" onClick={renderPatient}>Back to front page</button></div>;
 
 const root = document.getElementById('root');
 
@@ -42,12 +43,12 @@ const renderPatient = () => ReactDOM.render(<PatientPage />, root);
 const renderLogin = () => ReactDOM.render(<LoginPage />, root);
 const renderCheckup = () => ReactDOM.render(<CheckupPage />, root);
 const renderProfile = () => ReactDOM.render(<ProfilePage />, root);
-const renderReport = () => ReactDOM.render(<ReportPage />, root);
+const renderPrescriptions = () => ReactDOM.render(<PrescriptionPage />, root);
 const renderContact = () => ReactDOM.render(<ContactPage />, root);
 
 renderLogin();
 registerServiceWorker();
 
-export { Header, renderLogin, renderContact, renderCheckup, renderProfile, renderReport, renderPatient, BackToMain, Section };
+export { Header, renderLogin, renderContact, renderCheckup, renderProfile, renderPrescriptions, renderPatient, BackToMain, Section };
 
 

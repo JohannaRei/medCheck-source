@@ -5,6 +5,9 @@ body {
   text-align: center;
   background-color: #1dbfed;
   color: white;
+  min-height: 400px;
+  margin-bottom: 100px;
+  clear: both;
 }
 
 .jumbotron {
@@ -17,9 +20,27 @@ body {
   background-color: #7de3fc;
   height: 200px;
   line-height: 160px;
-  padding: 10px;
+  padding: 10px 40px;
   margin-bottom: 20px;
   border-radius: 10px;
+}
+
+.medbox {
+  display: block;
+  background-color: #7de3fc;
+  padding: 10px 40px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.profilebox {
+  background-color: #7de3fc;
+  line-height: 160px;
+  padding: 10px 40px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: auto;
 }
 
 .bgbox h3 {
@@ -46,12 +67,18 @@ input[type="text"] {
   border-color: white;
 }
 
+.biggertextbox {
+  width: 50%;
+}
+
 form {
   margin: 20px;
 }
 
 button {
   margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
   border-width: 0;
   padding: 5px 20px;
 }
@@ -108,4 +135,40 @@ button {
 	border-top: 0;
 	margin-top: -0.594em;
 	margin-right: -1.187em;
+}
+
+.foot {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 20px;
+}
+
+div .contact {
+  width: 50%;
+  margin: auto;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.profile-image {
+  float: left;
+}
+
+.profile-info {
+  position: relative;
+  height: 100px;
+  text-align: left;
+  width: 100%;
+  display: table-cell;
+} 
+
+.marg-right {
+  margin-right: 20px;
+}
+
+.slider {
+  padding-bottom: 50px;
 }
